@@ -2,14 +2,12 @@
 using System.Linq;
 using Gameplay.LevelStateMachine;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Infrastructure
 {
     public class LoadLevelState : IPayloadedState<string>
     {
         private readonly Gameplay.SceneLoader _sceneLoader;
-        private readonly LevelStateMachine _stateMachine;
 
         private readonly List<string> _scenePool = new()
         {
@@ -19,6 +17,8 @@ namespace Infrastructure
             Constants.Scenes.Level6,
             Constants.Scenes.Level7
         };
+
+        private readonly LevelStateMachine _stateMachine;
 
         private string _currentLevel;
 
@@ -38,14 +38,11 @@ namespace Infrastructure
                 _currentLevel = payload;
                 return;
             }
-            else
-            {
-                var sceneToLoad = GetRandomScene();
-                Debug.Log(sceneToLoad);
-                _sceneLoader.Load(sceneToLoad, _currentLevel, () => _stateMachine.Enter<EntryState>());
-                _currentLevel = sceneToLoad;
-                return;
-            }
+
+            var sceneToLoad = GetRandomScene();
+            Debug.Log(sceneToLoad);
+            _sceneLoader.Load(sceneToLoad, _currentLevel, () => _stateMachine.Enter<EntryState>());
+            _currentLevel = sceneToLoad;
         }
 
         public void Exit()
@@ -57,7 +54,7 @@ namespace Infrastructure
         {
             var scenes = _scenePool.ToList();
             scenes.Remove(_currentLevel);
-            return scenes[Random.Range(0, _scenePool.Count -1)];
+            return scenes[Random.Range(0, _scenePool.Count - 1)];
         }
     }
 }

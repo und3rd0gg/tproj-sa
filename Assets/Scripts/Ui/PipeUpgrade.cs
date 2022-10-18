@@ -8,7 +8,7 @@ namespace Ui
     {
         [SerializeField] private Animator _pipeAnimator;
         [SerializeField] private SuctionArea _suctionArea;
-        
+
         protected override void Upgrade()
         {
             _pipeAnimator.Play(Constants.AnimatorPipeController.States.Upgrade);

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Infrastructure
+﻿namespace Infrastructure
 {
     public interface IState : IExitableState
     {

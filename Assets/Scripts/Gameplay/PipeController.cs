@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using Packages.Joystick_Pack.Scripts.Joysticks;
 using UnityEngine;
@@ -16,6 +15,8 @@ namespace Gameplay
         private Vector3 _position;
         private Vector3 _startPosition;
 
+        private Vector2 LastMousePosition;
+
         private float minX, maxX, minZ, maxZ;
 
         private void Awake()
@@ -31,8 +32,6 @@ namespace Gameplay
             _suctionController.enabled = false;
         }
 
-        private Vector2 LastMousePosition;
-
         private void Update()
         {
             _position = transform.position;
@@ -42,10 +41,10 @@ namespace Gameplay
 
             if (Input.GetMouseButton(0))
             {
-                if(_position.x - mouseDelta.x < minX && _position.x - mouseDelta.x > maxX)
+                if (_position.x - mouseDelta.x < minX && _position.x - mouseDelta.x > maxX)
                     _position.x -= mouseDelta.x * 0.45f;
-                
-                if(_position.z - mouseDelta.y < minZ && _position.z - mouseDelta.y > maxZ)
+
+                if (_position.z - mouseDelta.y < minZ && _position.z - mouseDelta.y > maxZ)
                     _position.z -= mouseDelta.y * 0.45f;
             }
             else
@@ -57,9 +56,12 @@ namespace Gameplay
             transform.position = _position;
         }
 
-        public void MoveToStart(float time)
+        private void OnDrawGizmos()
         {
-            transform.DOMove(_startPosition, time);
+            Gizmos.DrawSphere(new Vector3(minX, transform.position.y, transform.position.z), 0.3f);
+            Gizmos.DrawSphere(new Vector3(maxX, transform.position.y, transform.position.z), 0.3f);
+            Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, minZ), 0.3f);
+            Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, maxZ), 0.3f);
         }
 
         public void Activate()
@@ -72,12 +74,9 @@ namespace Gameplay
             enabled = false;
         }
 
-        private void OnDrawGizmos()
+        public void MoveToStart(float time)
         {
-            Gizmos.DrawSphere(new Vector3(minX, transform.position.y, transform.position.z), 0.3f);
-            Gizmos.DrawSphere(new Vector3(maxX, transform.position.y, transform.position.z), 0.3f);
-            Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, minZ), 0.3f);
-            Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y, maxZ), 0.3f);
+            transform.DOMove(_startPosition, time);
         }
     }
 }

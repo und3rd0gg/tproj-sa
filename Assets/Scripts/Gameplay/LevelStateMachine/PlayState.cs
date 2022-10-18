@@ -6,14 +6,14 @@ namespace Gameplay.LevelStateMachine
 {
     public class PlayState : IState
     {
+        private readonly SuctionAxisController _axisController;
+        private readonly BricksSeller _bricksSeller;
+        private readonly BrickSucker _brickSucker;
         private readonly Bubble _bubble;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly FlaskRoot _flaskRoot;
         private readonly LevelStateMachine _levelStateMachine;
         private readonly PipeController _pipeController;
-        private readonly BrickSucker _brickSucker;
-        private readonly BricksSeller _bricksSeller;
-        private readonly SuctionAxisController _axisController;
-        private readonly FlaskRoot _flaskRoot;
 
         private bool _firstEnter = true;
 
@@ -37,10 +37,7 @@ namespace Gameplay.LevelStateMachine
         {
             Debug.Log("playstate enter");
 
-            if (!_firstEnter)
-            {
-                _coroutineRunner.StartCoroutine(_flaskRoot.MovePipeToLastPosition());
-            }
+            if (!_firstEnter) _coroutineRunner.StartCoroutine(_flaskRoot.MovePipeToLastPosition());
 
             _firstEnter = false;
             _pipeController.enabled = true;

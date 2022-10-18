@@ -11,8 +11,8 @@ namespace Gameplay.LevelStateMachine
         private readonly GameStartButton _gameStartButton;
         private readonly LevelStateMachine _levelStateMachine;
         private readonly float _shakeDelay = 3.5f;
-        private Coroutine _shakeTextRoutine;
         private readonly Animator _tapToStartAnimator;
+        private Coroutine _shakeTextRoutine;
 
 
         public EntryState(LevelStateMachine levelStateMachine, ICoroutineRunner coroutineRunner,
@@ -38,10 +38,7 @@ namespace Gameplay.LevelStateMachine
         {
             Debug.Log("entryState Exit");
 
-            if (_shakeTextRoutine != null)
-            {
-                _coroutineRunner.StopCoroutine(_shakeTextRoutine);
-            }
+            if (_shakeTextRoutine != null) _coroutineRunner.StopCoroutine(_shakeTextRoutine);
 
             _tapToStartAnimator.gameObject.SetActive(false);
             _gameStartButton.gameObject.SetActive(false);

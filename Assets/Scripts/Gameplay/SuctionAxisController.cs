@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -12,10 +11,10 @@ namespace Gameplay
         [SerializeField] private float _yOffset;
         [SerializeField] private Vector3 _boxExtents;
         [SerializeField] private Vector3 _center;
+        private bool _canMove;
 
         private Vector3 _lastPosition;
         private Vector3 _startPosition;
-        private bool _canMove = false;
 
         private void Awake()
         {
@@ -23,20 +22,22 @@ namespace Gameplay
             _center = _suctionArea.transform.position;
         }
 
-        private void OnEnable()
-        {
-            StartCoroutine(CheckWayRoutine());
-        }
-
         private void Update()
         {
             _center.y = _suctionArea.transform.position.y;
             _center.y -= _boxExtents.y / 2;
 
-            if (_canMove)
-            {
-                MoveDown();
-            }
+            if (_canMove) MoveDown();
+        }
+
+        private void OnEnable()
+        {
+            StartCoroutine(CheckWayRoutine());
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireCube(_center, _boxExtents);
         }
 
         public void Activate()
@@ -81,20 +82,11 @@ namespace Gameplay
                 var bricks = Physics.OverlapBox(_center, _boxExtents, Quaternion.identity);
                 var bricksCount = 0;
                 foreach (var brick in bricks)
-                {
                     if (brick.gameObject.layer == 11)
-                    {
                         bricksCount++;
-                    }
-                }
                 _canMove = bricksCount < 3;
                 yield return new WaitForSeconds(0.5f);
             }
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireCube(_center, _boxExtents);
         }
     }
 }

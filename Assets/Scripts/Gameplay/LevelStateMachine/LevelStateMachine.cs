@@ -32,8 +32,9 @@ namespace Gameplay.LevelStateMachine
                 [typeof(BuyState)] = new BuyState(this, _stateMachinePayload.UpgradeButtons,
                     _stateMachinePayload.BalancePresenter, _stateMachinePayload.GameStartButton),
                 [typeof(GameOverState)] =
-                    new GameOverState(this, _coroutineRunner, _stateMachinePayload.Bubble, _stateMachinePayload.GameOverScreen,
-                        _stateMachinePayload.FinishLevelButton),
+                    new GameOverState(this, _coroutineRunner, _stateMachinePayload.Bubble,
+                        _stateMachinePayload.GameOverScreen,
+                        _stateMachinePayload.FinishLevelButton)
                 //[typeof(LoadLevelState)] = new LoadLevelState(this, new SceneLoader(_coroutineRunner))
             };
         }

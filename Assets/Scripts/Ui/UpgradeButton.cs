@@ -15,7 +15,7 @@ namespace Ui
         [SerializeField] private uint _currentLevel = 1;
         [SerializeField] private uint _price = 100;
         [SerializeField] private float _priceMultiplier = 1.5f;
-        
+
         protected string UpgradeName;
         protected uint CurrentLevel => _currentLevel;
 
@@ -25,11 +25,8 @@ namespace Ui
             SetUpgradeName();
 
             _price = (uint) PlayerPrefs.GetInt($"{UpgradeName}price", 100);
-            
-            if (SaveProgress.HasSave(UpgradeName))
-            {
-                LoadSave();
-            }
+
+            if (SaveProgress.HasSave(UpgradeName)) LoadSave();
         }
 
         private void Reset()
@@ -37,6 +34,11 @@ namespace Ui
             _balance = FindObjectOfType<PlayerMoneyBalance>();
             _button = GetComponent<Button>();
             _levelPresenterText = GetComponentInChildren<Text>();
+        }
+
+        private void FixedUpdate()
+        {
+            if (_balance.Amount < _price) _button.interactable = false;
         }
 
         private void OnEnable()
@@ -47,14 +49,6 @@ namespace Ui
             UpdateLevelPresenter();
         }
 
-        private void FixedUpdate()
-        {
-            if (_balance.Amount < _price)
-            {
-                _button.interactable = false;
-            }
-        }
-
         protected void LoadSave()
         {
             _currentLevel = (uint) PlayerPrefs.GetInt(UpgradeName);
@@ -62,7 +56,9 @@ namespace Ui
 
         protected abstract void Upgrade();
 
-        protected virtual void SetUpgradeName(){}
+        protected virtual void SetUpgradeName()
+        {
+        }
 
         private void Buy()
         {

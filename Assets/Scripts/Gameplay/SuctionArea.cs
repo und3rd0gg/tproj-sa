@@ -8,19 +8,19 @@ namespace Gameplay
         [SerializeField] private BrickSucker _sucker;
         [SerializeField] private GameObject _suctionVFX;
 
-        [field: SerializeField] public int MaxSuctionRate { get; private set; } = 3;
-        [field: SerializeField] public int CurrentSuctionRate { get; set; } = 0;
-        
         private float _triggerRadius;
 
-        private void Reset()
-        {
-            _sphereCollider = GetComponent<SphereCollider>();
-        }
+        [field: SerializeField] public int MaxSuctionRate { get; private set; } = 3;
+        [field: SerializeField] public int CurrentSuctionRate { get; set; }
 
         private void Awake()
         {
             _triggerRadius = _sphereCollider.radius;
+        }
+
+        private void Reset()
+        {
+            _sphereCollider = GetComponent<SphereCollider>();
         }
 
         public void Activate()

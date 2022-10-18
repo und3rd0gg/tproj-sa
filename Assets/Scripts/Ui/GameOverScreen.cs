@@ -11,11 +11,11 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private Slider _progressSlider;
     [SerializeField] private TMP_Text _totalBricksView;
 
-    private readonly Dictionary<int, int> ResultMap = new Dictionary<int, int>()
+    private readonly Dictionary<int, int> ResultMap = new()
     {
         [0] = 1,
         [40] = 2,
-        [85] = 3,
+        [85] = 3
     };
 
     public void Activate(int suckedBricksPercent, int suckedBricksTotal)
@@ -36,7 +36,7 @@ public class GameOverScreen : MonoBehaviour
 
     private void ActivateStars(int starsCount)
     {
-        for (int i = 0; i < starsCount; i++)
+        for (var i = 0; i < starsCount; i++)
         {
             Stars[i].StarView.gameObject.SetActive(true);
             Stars[i].FX.gameObject.SetActive(true);
@@ -47,10 +47,7 @@ public class GameOverScreen : MonoBehaviour
     {
         var starsCount = 0;
 
-        foreach (var result in ResultMap.Where(result => suckedBricksPercent > result.Key))
-        {
-            starsCount = result.Value;
-        }
+        foreach (var result in ResultMap.Where(result => suckedBricksPercent > result.Key)) starsCount = result.Value;
 
         return starsCount;
     }

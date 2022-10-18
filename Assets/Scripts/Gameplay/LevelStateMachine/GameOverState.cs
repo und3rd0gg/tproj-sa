@@ -4,19 +4,17 @@ using System.Linq;
 using Infrastructure;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace Gameplay.LevelStateMachine
 {
     public class GameOverState : IState
     {
-        private readonly LevelStateMachine _levelStateMachine;
-        private readonly ICoroutineRunner _coroutineRunner;
         private readonly Bubble _bubble;
-        private readonly GameOverScreen _gameOverScreen;
+        private readonly ICoroutineRunner _coroutineRunner;
         private readonly FinishLevelButton _finishLevelButton;
-        
+        private readonly GameOverScreen _gameOverScreen;
+        private readonly LevelStateMachine _levelStateMachine;
+
         private readonly List<string> _scenePool = new()
         {
             Constants.Scenes.Level2,
@@ -70,12 +68,12 @@ namespace Gameplay.LevelStateMachine
             _levelStateMachine.Enter<EntryState>();
             yield return null;
         }
-        
+
         private string GetRandomScene()
         {
             var scenes = _scenePool.ToList();
             scenes.Remove(Level.CurrentScene);
-            return scenes[Random.Range(0, _scenePool.Count -1)];
+            return scenes[Random.Range(0, _scenePool.Count - 1)];
         }
 
         private int CalculatePercentage()

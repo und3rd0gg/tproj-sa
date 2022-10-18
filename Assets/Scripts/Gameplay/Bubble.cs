@@ -18,9 +18,9 @@ namespace Gameplay
         private int _currentStartPositionIndex;
 
         [field: SerializeField] public uint MaxBricks { get; private set; }
-        
+
         public int CurrentBricksCount => _bricks.Count;
-        public int TotalSuckedBricks { get; set; } = 0;
+        public int TotalSuckedBricks { get; set; }
 
         private void Awake()
         {
@@ -78,11 +78,8 @@ namespace Gameplay
         {
             var bricksCount = _bricks.Count;
 
-            foreach (var brick in _bricks)
-            {
-                Destroy(brick.gameObject);
-            }
-            
+            foreach (var brick in _bricks) Destroy(brick.gameObject);
+
             _bricks.Clear();
             BricksCountUpdated?.Invoke(Convert.ToUInt32(_bricks.Count));
             return bricksCount;

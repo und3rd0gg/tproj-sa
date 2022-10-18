@@ -7,12 +7,12 @@ namespace Gameplay
     {
         [field: SerializeField] public uint Amount { get; private set; }
 
-        public event Action<uint> AmountChanged;
-
         private void Awake()
         {
             Amount = (uint) PlayerPrefs.GetInt(nameof(PlayerMoneyBalance), 0);
         }
+
+        public event Action<uint> AmountChanged;
 
         public void AddMoney(int amount)
         {
@@ -20,7 +20,7 @@ namespace Gameplay
 
             Amount += Convert.ToUInt32(amount);
             AmountChanged?.Invoke(Amount);
-            PlayerPrefs.SetInt(nameof(PlayerMoneyBalance), (int)Amount);
+            PlayerPrefs.SetInt(nameof(PlayerMoneyBalance), (int) Amount);
         }
 
         public bool TrySpend(uint amount)

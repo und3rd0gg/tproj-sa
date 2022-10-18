@@ -7,7 +7,7 @@ namespace Gameplay
     {
         [SerializeField] private float _rotationLoopDuration = 3f;
 
-        private readonly Vector3 _rotation = new Vector3(360, 0, 0);
+        private readonly Vector3 _rotation = new(360, 0, 0);
         private Tween _rotationTween;
 
         private void Start()

@@ -9,8 +9,6 @@ namespace Gameplay
         [SerializeField] private Bubble _bubble;
         [SerializeField] private SuctionArea _suctionArea;
 
-        public event Action GroundTouched;
-
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.TryGetComponent(out Brick brick))
@@ -23,5 +21,7 @@ namespace Gameplay
             if (collision.gameObject.GetComponent<Ground>())
                 GroundTouched?.Invoke();
         }
+
+        public event Action GroundTouched;
     }
 }

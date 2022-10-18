@@ -11,14 +11,19 @@ namespace Gameplay
         [SerializeField] private Collider _collider;
         [SerializeField] private Brick _connectedBrick;
         [SerializeField] private float _maxSqrSpeed = 200;
+        private Vector3 _defaultScale;
+        private Coroutine _restoreDefaultScaleRoutine;
 
 
         private Vector3 _startPosition;
-        private Coroutine _suctionRoutine;
-        private Coroutine _restoreDefaultScaleRoutine;
-        private Transform _target;
         private SuctionArea _suctionArea;
-        private Vector3 _defaultScale;
+        private Coroutine _suctionRoutine;
+        private Transform _target;
+
+        private void Awake()
+        {
+            _defaultScale = transform.localScale;
+        }
 
         private void Reset()
         {
@@ -36,11 +41,6 @@ namespace Gameplay
             }
         }
 
-        private void Awake()
-        {
-            _defaultScale = transform.localScale;
-        }
-
         private void FixedUpdate()
         {
             if (_rigidbody.velocity.sqrMagnitude > _maxSqrSpeed)
@@ -54,9 +54,9 @@ namespace Gameplay
                 if (_restoreDefaultScaleRoutine != null)
                     StopCoroutine(_restoreDefaultScaleRoutine);
                 _suctionArea.CurrentSuctionRate++;
-                    _startPosition = transform.position;
-                    _target = other.transform;
-                    _suctionRoutine = StartCoroutine(SuctionRoutine());
+                _startPosition = transform.position;
+                _target = other.transform;
+                _suctionRoutine = StartCoroutine(SuctionRoutine());
             }
         }
 
@@ -73,7 +73,7 @@ namespace Gameplay
         }
 
         [field: SerializeField]
-        public Vector3 ScaleModifier { get; set; } = new Vector3(0.382695436f, 0.153153211f, 0.379052579f);
+        public Vector3 ScaleModifier { get; set; } = new(0.382695436f, 0.153153211f, 0.379052579f);
 
         public void DisablePhysics()
         {
@@ -84,7 +84,6 @@ namespace Gameplay
         public void EnablePhysics()
         {
             _rigidbody.isKinematic = false;
-            //_connectedBrick?.EnablePhysics();
         }
 
         private IEnumerator SuctionRoutine()
@@ -106,6 +105,9 @@ namespace Gameplay
             }
         }
 
-        private static float Easing(float x) => x * x;
+        private static float Easing(float x)
+        {
+            return x * x;
+        }
     }
 }

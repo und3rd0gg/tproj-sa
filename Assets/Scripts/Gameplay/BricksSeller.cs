@@ -22,14 +22,14 @@ namespace Gameplay
 
         private ObjectPool<Transform> _objectPool;
 
-        public event Action SaleCompleted;
-
         private void Awake()
         {
             _sellingMultiplier = PlayerPrefs.GetInt(nameof(_sellingMultiplier), 1);
             _objectPool = new ObjectPool<Transform>(CreateCoinsPool, OnTakeFromPool, OnReturnToPool, ActionOnDestroy,
                 false, 300, 500);
         }
+
+        public event Action SaleCompleted;
 
         private void ActionOnDestroy(Transform obj)
         {
@@ -68,7 +68,7 @@ namespace Gameplay
 
             if (bricksCount > 300)
                 bricksCount = 300;
-            
+
             var coins = new Transform[bricksCount];
 
             yield return StartCoroutine(MoveCoinToBalancePresenterRoutine(coins));
@@ -77,9 +77,9 @@ namespace Gameplay
             {
                 yield return StartCoroutine(MoveToRandomPosition());
 
-                 _bubble.Clear();
+                _bubble.Clear();
 
-                 var target = _coinTarget.position;
+                var target = _coinTarget.position;
 
                 const float animationDuration = 8f;
 
