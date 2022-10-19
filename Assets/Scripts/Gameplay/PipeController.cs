@@ -42,10 +42,10 @@ namespace Gameplay
             if (Input.GetMouseButton(0))
             {
                 if (_position.x - mouseDelta.x < minX && _position.x - mouseDelta.x > maxX)
-                    _position.x -= mouseDelta.x * 0.45f;
+                    _position.x -= mouseDelta.x * 0.25f;
 
                 if (_position.z - mouseDelta.y < minZ && _position.z - mouseDelta.y > maxZ)
-                    _position.z -= mouseDelta.y * 0.45f;
+                    _position.z -= mouseDelta.y * 0.25f;
             }
             else
             {

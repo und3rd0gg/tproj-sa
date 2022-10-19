@@ -13,8 +13,6 @@ namespace Gameplay
         [SerializeField] private Bubble _bubble;
         [SerializeField] private PlayerMoneyBalance _playerBalance;
         [SerializeField] private int _sellingMultiplier;
-        [SerializeField] private int _sellingDelay;
-        [SerializeField] private ParticleSystem _dollarParticle;
 
         [SerializeField] private Transform _coin;
         [SerializeField] private BalancePresenter _balancePresenter;

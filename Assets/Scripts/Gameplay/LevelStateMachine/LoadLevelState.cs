@@ -30,8 +30,6 @@ namespace Infrastructure
 
         public void Enter(string payload = null)
         {
-            Debug.Log("loadlevelState enter");
-
             if (_currentLevel == null)
             {
                 _sceneLoader.Load(payload, null, () => _stateMachine.Enter<EntryState>());
@@ -46,9 +44,7 @@ namespace Infrastructure
         }
 
         public void Exit()
-        {
-            Debug.Log("loadlevelstate exit");
-        }
+        { }
 
         private string GetRandomScene()
         {

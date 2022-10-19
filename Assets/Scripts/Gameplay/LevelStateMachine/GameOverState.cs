@@ -38,14 +38,12 @@ namespace Gameplay.LevelStateMachine
 
         public void Exit()
         {
-            Debug.Log("GameOverState exit");
             _bubble.TotalSuckedBricks = 0;
             _gameOverScreen.gameObject.SetActive(false);
         }
 
         public void Enter()
         {
-            Debug.Log("GameOverState enter");
             var suckedBricksPercent = CalculatePercentage();
             _gameOverScreen.Activate(suckedBricksPercent, _bubble.TotalSuckedBricks);
             _finishLevelButton.Clicked += FinishLevelButtonOnClicked;
@@ -53,7 +51,6 @@ namespace Gameplay.LevelStateMachine
 
         private void FinishLevelButtonOnClicked()
         {
-            //_levelStateMachine.Enter<LoadLevelState, string>(null);
             _coroutineRunner.StartCoroutine(LoadNextRandomLevel());
             _finishLevelButton.Clicked -= FinishLevelButtonOnClicked;
         }

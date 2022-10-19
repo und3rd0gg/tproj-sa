@@ -27,7 +27,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Enter()
         {
-            Debug.Log("entrystate enter");
             _tapToStartAnimator.gameObject.SetActive(true);
             _gameStartButton.gameObject.SetActive(true);
             _shakeTextRoutine = _coroutineRunner.StartCoroutine(ShakeTextRoutine());
@@ -36,8 +35,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Exit()
         {
-            Debug.Log("entryState Exit");
-
             if (_shakeTextRoutine != null) _coroutineRunner.StopCoroutine(_shakeTextRoutine);
 
             _tapToStartAnimator.gameObject.SetActive(false);

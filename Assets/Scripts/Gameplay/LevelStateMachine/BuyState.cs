@@ -24,7 +24,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Enter()
         {
-            Debug.Log("BuyStateEnter");
             _upgradeButtons.SetActive(true);
             _gameStartButton.gameObject.SetActive(true);
             _gameStartButton.Clicked += EnterPlayState;
@@ -32,7 +31,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Exit()
         {
-            Debug.Log("BuyStateExit");
             _gameStartButton.gameObject.SetActive(false);
             _upgradeButtons.SetActive(false);
             _balancePresenter.gameObject.SetActive(false);

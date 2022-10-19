@@ -35,7 +35,6 @@ namespace Gameplay.LevelStateMachine
                     new GameOverState(this, _coroutineRunner, _stateMachinePayload.Bubble,
                         _stateMachinePayload.GameOverScreen,
                         _stateMachinePayload.FinishLevelButton)
-                //[typeof(LoadLevelState)] = new LoadLevelState(this, new SceneLoader(_coroutineRunner))
             };
         }
     }

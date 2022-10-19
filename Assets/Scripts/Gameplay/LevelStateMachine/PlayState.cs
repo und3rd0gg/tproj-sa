@@ -35,8 +35,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Enter()
         {
-            Debug.Log("playstate enter");
-
             if (!_firstEnter) _coroutineRunner.StartCoroutine(_flaskRoot.MovePipeToLastPosition());
 
             _firstEnter = false;
@@ -48,7 +46,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Exit()
         {
-            Debug.Log("playstate exit");
             _bubble.BubbleFilled -= OnBubbleFilled;
             _brickSucker.GroundTouched -= OnGroundTouched;
         }
@@ -60,7 +57,6 @@ namespace Gameplay.LevelStateMachine
 
         private IEnumerator OnGroundTouchedRoutine()
         {
-            Debug.Log("ground touched");
             _flaskRoot.Deactivate();
             _pipeController.enabled = false;
             yield return _coroutineRunner.StartCoroutine(_flaskRoot.ReturnPipe());

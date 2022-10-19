@@ -79,3 +79,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/RayFire/Plugins/Ios/libRF_CNative_ios.a.meta
+Assets/RayFire/Plugins/Ios/libRF_CNative_ios.a
+Assets/RayFire/Plugins/Ios/RFLib_DotNet_2018_ios.dll
+Assets/RayFire/Plugins/Ios/RFLib_DotNet_2018_ios.dll.meta

@@ -22,7 +22,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Enter()
         {
-            Debug.Log("SellStateEnter");
             _balancePresenter.gameObject.SetActive(true);
             _bricksSeller.SellBricks(null);
             _bricksSeller.SaleCompleted += BricksSellerOnSaleCompleted;
@@ -30,7 +29,6 @@ namespace Gameplay.LevelStateMachine
 
         public void Exit()
         {
-            Debug.Log("SellStateExit");
             _bricksSeller.SaleCompleted -= BricksSellerOnSaleCompleted;
         }
 

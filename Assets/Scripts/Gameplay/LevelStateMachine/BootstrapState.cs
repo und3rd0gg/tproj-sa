@@ -1,5 +1,4 @@
 ﻿using Infrastructure;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Gameplay.LevelStateMachine
@@ -14,13 +13,10 @@ namespace Gameplay.LevelStateMachine
         }
 
         public void Exit()
-        {
-            Debug.Log("bootstrapstate exit");
-        }
+        { }
 
         public void Enter()
         {
-            Debug.Log("bootstrapstate enter");
             Level.CurrentScene = Constants.Scenes.Level6;
             SceneManager.LoadScene(Level.CurrentScene, LoadSceneMode.Additive);
             _stateMachine.Enter<EntryState>();
